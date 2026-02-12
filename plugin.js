@@ -104,9 +104,19 @@ const css = `
   white-space: nowrap;
   transition: border-color 0.15s, background 0.15s;
 }
+.kb-open-native-btn.kb-has-custom {
+  border-color: var(--color-primary, #4a9eff);
+  background: var(--color-primary, #4a9eff);
+  font-weight: 700;
+  box-shadow: 0 1px 0 var(--color-border, rgba(0,0,0,0.12));
+}
 .kb-open-native-btn:hover {
   border-color: var(--color-text-muted, rgba(0,0,0,0.25));
   background: var(--color-hover, rgba(0,0,0,0.04));
+}
+.kb-open-native-btn.kb-has-custom:hover {
+  background: var(--color-primary-hover, #3a8eef);
+  border-color: var(--color-primary-hover, #3a8eef);
 }
 .kb-header-actions {
   display: flex;
@@ -915,11 +925,12 @@ class Plugin extends AppPlugin {
                 // Open native shortcut editor (best-effort)
                 const openNativeBtn = document.createElement('button');
                 openNativeBtn.className = 'kb-open-native-btn';
-                openNativeBtn.textContent = 'Copy Bindings & Open “Change Keyboard Shortcuts”';
+                openNativeBtn.textContent = 'Copy Bindings';
                 openNativeBtn.title = 'Copies JSON and prompts you to open the native Thymer shortcut editor';
                 openNativeBtn.addEventListener('click', () => {
                     this._copyConfigAndPromptNative();
                 });
+                openNativeBtn.classList.add('kb-has-custom');
                 actionsWrap.appendChild(openNativeBtn);
 
                 // Reset All button
