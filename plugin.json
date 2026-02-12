@@ -1,0 +1,9 @@
+{
+  "ver": 1,
+  "name": "Keyboard Shortcuts",
+  "icon": "keyboard",
+  "description": "Visual editor for browsing, searching, and customizing Thymer keyboard shortcuts",
+  "custom": {
+    "shortcuts": {}
+  }
+}
