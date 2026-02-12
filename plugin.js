@@ -665,17 +665,18 @@ class Plugin extends AppPlugin {
             this._renderPanel(panel);
         });
 
-        // Add sidebar item
+        /* Add sidebar item
         this._sidebarItem = this.ui.addSidebarItem({
             label: 'Keyboard Shortcuts',
             icon: 'keyboard',
             tooltip: 'Browse and customize keyboard shortcuts',
             onClick: () => this._openPanel(),
         });
+        */
 
         // Add command palette command
         this._cmdPalItem = this.ui.addCommandPaletteCommand({
-            label: 'Keyboard Shortcuts',
+            label: 'Change Keyboard Shortcuts (GUI)',
             icon: 'keyboard',
             onSelected: () => this._openPanel(),
         });

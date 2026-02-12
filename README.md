@@ -19,7 +19,7 @@ A visual editor for browsing, searching, and customizing Thymer keyboard shortcu
 
 ## Usage
 
-1. **Open the editor**: Click "Keyboard Shortcuts" in the sidebar, or use Cmd+P → "Keyboard Shortcuts"
+1. **Open the editor**: Cmd+P → "Change Keyboard Shortcuts (GUI)"
 2. **Search**: Type in the search bar to filter by action name or key combo
 3. **Edit a shortcut**: Hover over a shortcut row and click the ✏️ button
 4. **Press your new keys**: The plugin captures your key press and validates it
