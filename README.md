@@ -2,6 +2,7 @@
 
 A visual editor for browsing, searching, and customizing Thymer keyboard shortcuts — replacing the manual "Cmd+P → Change Keyboard Shortcuts" workflow with a full GUI.
 
+![Key Binding GUI](screenshot-key-bindings.png)
 ## Features
 
 - **Browse/Search all shortcuts** organized by category (Command Palette, Panels, Editor, Tasks, etc.) and searchable by action name or key combo.
