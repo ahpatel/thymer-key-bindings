@@ -11,7 +11,6 @@ const css = `
 /* Thymer Keyboard Shortcuts Plugin — Themed Styles */
 .kb-shortcuts-panel {
   font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-  color: var(--color-text, #111);
   padding: 24px 32px;
   max-width: 720px;
   margin: 0 auto;
@@ -48,14 +47,13 @@ const css = `
   padding: 7px 12px 7px 32px;
   border: 1px solid var(--color-border, rgba(0,0,0,0.12));
   border-radius: 6px;
-  background: var(--color-input-bg, rgba(0,0,0,0.04));
-  color: var(--color-text, #111);
+  background: var(--color-input-bg, transparent);
   font-size: 0.85rem;
   outline: none;
   transition: border-color 0.15s;
 }
 .kb-search-input::placeholder {
-  color: var(--color-text-muted, rgba(0,0,0,0.45));
+  opacity: 0.7;
 }
 .kb-search-input:focus {
   border-color: var(--color-accent, #6b8afd);
@@ -75,13 +73,11 @@ const css = `
   border: 1px solid var(--color-border, rgba(0,0,0,0.12));
   border-radius: 5px;
   background: transparent;
-  color: var(--color-text-muted, rgba(0,0,0,0.55));
   cursor: pointer;
   white-space: nowrap;
   transition: color 0.15s, border-color 0.15s;
 }
 .kb-reset-all-btn:hover {
-  color: var(--color-text, #111);
   border-color: var(--color-text-muted, rgba(0,0,0,0.25));
 }
 .kb-copy-config-btn {
@@ -89,7 +85,6 @@ const css = `
   border-radius: 6px;
   border: 1px solid var(--color-border, rgba(0,0,0,0.12));
   background: var(--color-primary, #4a9eff);
-  color: #fff;
   font-size: 0.75rem;
   cursor: pointer;
   transition: background 0.15s;
@@ -104,7 +99,6 @@ const css = `
   border-radius: 6px;
   border: 1px solid var(--color-border, rgba(0,0,0,0.12));
   background: transparent;
-  color: var(--color-text, #111);
   font-size: 0.75rem;
   cursor: pointer;
   white-space: nowrap;
@@ -112,7 +106,7 @@ const css = `
 }
 .kb-open-native-btn:hover {
   border-color: var(--color-text-muted, rgba(0,0,0,0.25));
-  background: rgba(0,0,0,0.04);
+  background: var(--color-hover, rgba(0,0,0,0.04));
 }
 .kb-header-actions {
   display: flex;
@@ -133,12 +127,12 @@ const css = `
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--color-text-muted, rgba(0,0,0,0.55));
+  opacity: 0.7;
   border-bottom: 1px solid var(--color-border, rgba(0,0,0,0.08));
   transition: color 0.15s;
 }
 .kb-category-header:hover {
-  color: var(--color-text, #111);
+  opacity: 1;
 }
 .kb-category-chevron {
   font-size: 0.6rem;
@@ -189,10 +183,9 @@ const css = `
   padding: 0 6px;
   font-size: 0.75rem;
   font-family: var(--font-family-mono, 'SF Mono', 'Fira Code', 'Consolas', monospace);
-  background: var(--color-input-bg, rgba(0,0,0,0.06));
-  border: 1px solid var(--color-border, rgba(0,0,0,0.15));
+  background: var(--color-input-bg, transparent);
+  border: 1px solid var(--color-border, rgba(0,0,0,0.12));
   border-radius: 4px;
-  color: var(--color-text, #333);
   box-shadow: 0 1px 0 var(--color-border, rgba(0,0,0,0.08));
   white-space: nowrap;
   line-height: 1;
@@ -204,7 +197,6 @@ const css = `
 .kb-shortcut-row.kb-customized .kb-kbd {
   background: var(--color-accent-bg, rgba(107,138,253,0.12));
   border-color: var(--color-accent, rgba(107,138,253,0.35));
-  color: var(--color-accent, #6b8afd);
 }
 .kb-shortcut-actions {
   display: flex;
@@ -220,7 +212,6 @@ const css = `
 .kb-action-btn {
   background: none;
   border: none;
-  color: var(--color-text-muted, rgba(0,0,0,0.45));
   cursor: pointer;
   padding: 3px 5px;
   border-radius: 4px;
@@ -229,11 +220,10 @@ const css = `
   transition: color 0.15s, background 0.15s;
 }
 .kb-action-btn:hover {
-  color: var(--color-text, #333);
   background: var(--color-hover, rgba(0,0,0,0.06));
 }
 .kb-action-btn.kb-reset-btn {
-  color: var(--color-accent, #6b8afd);
+  opacity: 0.9;
 }
 .kb-action-btn.kb-reset-btn:hover {
   background: var(--color-accent-bg, rgba(107,138,253,0.12));
@@ -261,12 +251,10 @@ const css = `
 }
 .kb-recording-hint {
   font-size: 0.7rem;
-  color: var(--color-text-muted, rgba(0,0,0,0.45));
   margin-left: 8px;
 }
 .kb-conflict-msg {
   font-size: 0.75rem;
-  color: var(--color-warning, #f59e0b);
   padding: 4px 8px;
   margin-top: 2px;
   display: flex;
@@ -276,20 +264,17 @@ const css = `
 .kb-no-results {
   text-align: center;
   padding: 32px 16px;
-  color: var(--color-text-muted, rgba(0,0,0,0.45));
   font-size: 0.85rem;
 }
 .kb-subcategory-label {
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--color-text-muted, rgba(0,0,0,0.45));
   padding: 10px 8px 4px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 .kb-note {
   font-size: 0.75rem;
-  color: var(--color-text-muted, rgba(0,0,0,0.45));
   padding: 2px 8px 6px;
   font-style: italic;
 }
@@ -303,6 +288,7 @@ const css = `
 .kb-saved-indicator.kb-visible {
   opacity: 1;
 }
+
 `;
 
 // ---------------------------------------------------------------------------
