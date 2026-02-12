@@ -99,6 +99,21 @@ const css = `
   background: var(--color-primary-hover, #3a8eef);
   filter: brightness(1.1);
 }
+.kb-open-native-btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border, rgba(255,255,255,0.12));
+  background: transparent;
+  color: var(--color-text, #e0e0e0);
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s, background 0.15s;
+}
+.kb-open-native-btn:hover {
+  border-color: var(--color-text-muted, rgba(255,255,255,0.3));
+  background: rgba(255,255,255,0.04);
+}
 .kb-header-actions {
   display: flex;
   gap: 8px;
@@ -773,26 +788,28 @@ class Plugin extends AppPlugin {
         return result;
     }
 
+   
+
     /**
-     * Copy the customized shortcuts config JSON to the clipboard.
+     * Copy config JSON and prompt the user to open the native Thymer dialog.
      */
-    _copyConfigToClipboard() {
+    _copyConfigAndPromptNative() {
         const config = this._buildConfigJSON();
         const json = JSON.stringify(config, null, 2);
+        const openCmd = IS_MAC ? '⌘P' : 'Ctrl+P';
         navigator.clipboard.writeText(json).then(() => {
-            const count = Object.keys(config).length;
             this.ui.addToaster({
-                title: 'Config copied to clipboard',
-                message: count + ' customized shortcut' + (count !== 1 ? 's' : '') + ' — paste into Thymer\'s "Change Keyboard Shortcuts" page',
+                title: 'Custom Bindings Copied',
+                message: 'Now press ' + openCmd + ' and run "Change Keyboard Shortcuts", then paste the JSON.',
                 dismissible: true,
-                autoDestroyTime: 4000,
+                autoDestroyTime: 6000,
             });
         }).catch(() => {
             this.ui.addToaster({
                 title: 'Failed to copy',
-                message: 'Clipboard access denied. Try copying manually.',
+                message: 'Clipboard access denied. Open ' + openCmd + ' → "Change Keyboard Shortcuts" and paste manually.',
                 dismissible: true,
-                autoDestroyTime: 3000,
+                autoDestroyTime: 6000,
             });
         });
     }
@@ -902,15 +919,15 @@ class Plugin extends AppPlugin {
                 const actionsWrap = document.createElement('div');
                 actionsWrap.className = 'kb-header-actions';
 
-                // Copy Config button
-                const copyBtn = document.createElement('button');
-                copyBtn.className = 'kb-copy-config-btn';
-                copyBtn.textContent = '📋 Copy Config';
-                copyBtn.title = 'Copy customized shortcuts as JSON for Thymer\'s "Change Keyboard Shortcuts" page';
-                copyBtn.addEventListener('click', () => {
-                    this._copyConfigToClipboard();
+                // Open native shortcut editor (best-effort)
+                const openNativeBtn = document.createElement('button');
+                openNativeBtn.className = 'kb-open-native-btn';
+                openNativeBtn.textContent = 'Copy Bindings & Open “Change Keyboard Shortcuts”';
+                openNativeBtn.title = 'Copies JSON and prompts you to open the native Thymer shortcut editor';
+                openNativeBtn.addEventListener('click', () => {
+                    this._copyConfigAndPromptNative();
                 });
-                actionsWrap.appendChild(copyBtn);
+                actionsWrap.appendChild(openNativeBtn);
 
                 // Reset All button
                 const resetAllBtn = document.createElement('button');
