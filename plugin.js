@@ -182,8 +182,10 @@ const css = `
 .kb-shortcut-keys {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 4px;
   flex-shrink: 0;
+  margin-left: auto;
 }
 .kb-kbd {
   display: inline-flex;
@@ -211,10 +213,12 @@ const css = `
 .kb-shortcut-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 2px;
   flex-shrink: 0;
   opacity: 0;
   transition: opacity 0.12s;
+  width: 56px;
 }
 .kb-shortcut-row:hover .kb-shortcut-actions {
   opacity: 1;
@@ -1080,12 +1084,15 @@ class Plugin extends AppPlugin {
         });
         actionsEl.appendChild(editBtn);
 
-        // Reset button (only if customized)
-        if (isCustomized) {
-            const resetBtn = document.createElement('button');
-            resetBtn.className = 'kb-action-btn kb-reset-btn';
-            resetBtn.title = 'Reset to default';
-            resetBtn.textContent = '↺';
+        // Reset button (rendered always to reserve space for alignment)
+        const resetBtn = document.createElement('button');
+        resetBtn.className = 'kb-action-btn kb-reset-btn';
+        resetBtn.title = 'Reset to default';
+        resetBtn.textContent = '↺';
+        if (!isCustomized) {
+            resetBtn.style.visibility = 'hidden';
+            resetBtn.style.pointerEvents = 'none';
+        } else {
             resetBtn.addEventListener('click', async (e) => {
                 e.stopPropagation();
                 await this._removeCustomShortcut(sc.id);
@@ -1097,8 +1104,8 @@ class Plugin extends AppPlugin {
                     autoDestroyTime: 2000,
                 });
             });
-            actionsEl.appendChild(resetBtn);
         }
+        actionsEl.appendChild(resetBtn);
 
         row.appendChild(actionsEl);
         return row;
